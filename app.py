@@ -1,5 +1,5 @@
 """ API Pizzas FullStack"""
-from flask import Flask,request,redirect
+from flask import Flask,request,redirect, Response
 from persistencia import guardar_pedido
 
 app = Flask(__name__)
@@ -12,3 +12,14 @@ def registrar_pedido():
     print("Nombre : "+nombre+" , Apellidos: "+apellidos)
     guardar_pedido(nombre,apellidos)
     return redirect("http://localhost/solicita_pedido.html", code=302)
+
+@app.route("/checksize",methods=['POST'])
+def checksize():
+    """ Comprueba disponibilidad de un tamaño de pizza. """
+    pizza_size = request.form.get ("size")
+    print (pizza_size)
+    if pizza_size == "S":
+        mensaje = "No disponible"
+    else:
+        mensaje = "Disponible"
+    return Response(mensaje, 200, {'Access-Control-Allow-Origin': '*'})
