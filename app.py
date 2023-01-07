@@ -17,7 +17,6 @@ def registrar_pedido():
 def checksize():
     """ Comprueba disponibilidad de un tamaño de pizza. """
     pizza_size = request.form.get ("size")
-    print (pizza_size)
     if pizza_size == "S":
         mensaje = "No disponible"
     else:
